@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-typedef void (^onComplete)(NSArray * __nullable dataArray, NSString * __nullable errMessage);
+typedef void (^onComplete)(NSDictionary * __nullable dataDictionary, NSString * __nullable errMessage);
 
 @interface HTTPService : NSObject
 

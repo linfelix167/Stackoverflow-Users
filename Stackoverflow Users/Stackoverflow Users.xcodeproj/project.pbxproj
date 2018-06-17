@@ -14,6 +14,7 @@
 		A0A500A220D20E1B00A80B31 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A0A500A120D20E1B00A80B31 /* Assets.xcassets */; };
 		A0A500A520D20E1B00A80B31 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A0A500A320D20E1B00A80B31 /* LaunchScreen.storyboard */; };
 		A0A500A820D20E1B00A80B31 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A0A500A720D20E1B00A80B31 /* main.m */; };
+		A0E1C62A20D6E279007F722A /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = A0E1C62920D6E279007F722A /* User.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,8 @@
 		A0A500A420D20E1B00A80B31 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A0A500A620D20E1B00A80B31 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A0A500A720D20E1B00A80B31 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		A0E1C62820D6E279007F722A /* User.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		A0E1C62920D6E279007F722A /* User.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +48,8 @@
 		A00DBE9F20D469BF00FF9847 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				A0E1C62820D6E279007F722A /* User.h */,
+				A0E1C62920D6E279007F722A /* User.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -77,12 +82,11 @@
 		A0A5009720D20E1900A80B31 /* Stackoverflow Users */ = {
 			isa = PBXGroup;
 			children = (
+				A0E1C62B20D6E798007F722A /* Controller */,
 				A09D2FF120D5ECAD00060AE0 /* Services */,
 				A00DBE9F20D469BF00FF9847 /* Model */,
 				A0A5009820D20E1900A80B31 /* AppDelegate.h */,
 				A0A5009920D20E1900A80B31 /* AppDelegate.m */,
-				A0A5009B20D20E1900A80B31 /* ViewController.h */,
-				A0A5009C20D20E1900A80B31 /* ViewController.m */,
 				A0A5009E20D20E1900A80B31 /* Main.storyboard */,
 				A0A500A120D20E1B00A80B31 /* Assets.xcassets */,
 				A0A500A320D20E1B00A80B31 /* LaunchScreen.storyboard */,
@@ -90,6 +94,15 @@
 				A0A500A720D20E1B00A80B31 /* main.m */,
 			);
 			path = "Stackoverflow Users";
+			sourceTree = "<group>";
+		};
+		A0E1C62B20D6E798007F722A /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				A0A5009B20D20E1900A80B31 /* ViewController.h */,
+				A0A5009C20D20E1900A80B31 /* ViewController.m */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -162,6 +175,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A0E1C62A20D6E279007F722A /* User.m in Sources */,
 				A0A5009D20D20E1900A80B31 /* ViewController.m in Sources */,
 				A09D2FF420D5ECDD00060AE0 /* HTTPService.m in Sources */,
 				A0A500A820D20E1B00A80B31 /* main.m in Sources */,
