@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "HTTPService.h"
 
 @interface ViewController ()
 
@@ -16,7 +17,21 @@
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-  // Do any additional setup after loading the view, typically from a nib.
+  
+  self.navigationItem.title = @"Users";
+  self.navigationController.navigationBar.prefersLargeTitles = YES;
+  
+  [[HTTPService instance] getUsers:^(NSArray * _Nullable dataArray, NSString * _Nullable errMessage) {
+    if (dataArray) {
+      NSLog(@"DataArray: %@", dataArray.debugDescription);
+    }
+  }];
+}
+
+- (void) updateTableData {
+  dispatch_async(dispatch_get_main_queue(), ^{
+    [self.tableView reloadData];
+  });
 }
 
 @end
