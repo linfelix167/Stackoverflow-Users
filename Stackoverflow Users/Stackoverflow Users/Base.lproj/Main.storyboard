@@ -28,17 +28,25 @@
             </objects>
             <point key="canvasLocation" x="216.80000000000001" y="792.95352323838085"/>
         </scene>
-        <!--View Controller-->
+        <!--Table View Controller-->
         <scene sceneID="g3d-dc-6Ih">
             <objects>
-                <tableViewController id="3ti-DZ-wWo" customClass="ViewController" sceneMemberID="viewController">
+                <tableViewController id="3ti-DZ-wWo" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="cx6-9b-LtW">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" id="qtj-aV-ylQ">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <outlet property="delegate" destination="3ti-DZ-wWo" id="MIw-HN-ZzI"/>
+                            </connections>
+                        </searchBar>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cell" rowHeight="100" id="vUj-iI-fPS" customClass="UserCell">
-                                <rect key="frame" x="0.0" y="28" width="375" height="100"/>
+                                <rect key="frame" x="0.0" y="72" width="375" height="100"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="vUj-iI-fPS" id="9oy-Lj-k8t">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
@@ -128,8 +136,20 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="GEg-e5-0h4"/>
+                    <connections>
+                        <outlet property="searchDisplayController" destination="hUo-4F-kfu" id="3ZS-93-y1J"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sl3-O8-EQ5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="hUo-4F-kfu">
+                    <connections>
+                        <outlet property="delegate" destination="3ti-DZ-wWo" id="UuW-9G-Hei"/>
+                        <outlet property="searchBar" destination="qtj-aV-ylQ" id="mYS-AF-KxK"/>
+                        <outlet property="searchContentsController" destination="3ti-DZ-wWo" id="JTM-xF-GVc"/>
+                        <outlet property="searchResultsDataSource" destination="3ti-DZ-wWo" id="iQh-QJ-8Zu"/>
+                        <outlet property="searchResultsDelegate" destination="3ti-DZ-wWo" id="B77-RM-TvX"/>
+                    </connections>
+                </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="1065" y="793"/>
         </scene>

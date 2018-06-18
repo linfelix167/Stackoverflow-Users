@@ -9,38 +9,59 @@
 #import "ViewController.h"
 #import "HTTPService.h"
 #import "User.h"
-#import "UserCell.h"
+
+@interface ViewController()
+
+@property (strong, nonatomic) NSMutableArray<User *> *userList;
+
+@end
 
 @implementation ViewController
+
+NSString *cellId = @"cellId";
 
 - (void)viewDidLoad {
   [super viewDidLoad];
   
+  searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
+  [searchBar setPlaceholder:@"Search for User"];
+  self.tableView.tableHeaderView = searchBar;
+  
+  [self fetchUsers];
+  
   self.navigationItem.title = @"Users";
   self.navigationController.navigationBar.prefersLargeTitles = YES;
   
-  self.userList = NSArray.new;
-  
+  [self.tableView registerClass:UITableViewCell.class forCellReuseIdentifier:cellId];
+}
+
+- (void) fetchUsers {
   [[HTTPService instance] getUsers:^(NSDictionary * _Nullable dataDictionary, NSString * _Nullable errMessage) {
     if (dataDictionary) {
       
-      NSMutableArray *arr = NSMutableArray.new;
+      NSMutableArray<User *> *users = NSMutableArray.new;
       NSDictionary *items = [dataDictionary objectForKey:@"items"];
       
       for (NSDictionary *dictionary in items) {
         User *user = User.new;
-        user.name = [dictionary objectForKey:@"display_name"];
-        user.imageUrl = [dictionary objectForKey:@"profile_image"];
-        
         NSDictionary *badgeCounts = [dictionary objectForKey:@"badge_counts"];
-        user.bronzeCount = [badgeCounts objectForKey:@"bronze"];
-        user.silverCount = [badgeCounts objectForKey:@"silver"];
-        user.goldCount = [badgeCounts objectForKey:@"gold"];
         
-        [arr addObject:user];
+        NSString *name = dictionary[@"display_name"];
+        NSString *imageUrl = dictionary[@"profile_image"];
+        NSNumber *bronzeCount = badgeCounts[@"bronze"];
+        NSNumber *silverCount = badgeCounts[@"silver"];
+        NSNumber *goldCount = badgeCounts[@"gold"];
+        
+        user.name = name;
+        user.imageUrl = imageUrl;
+        user.bronzeCount = bronzeCount;
+        user.silverCount = silverCount;
+        user.goldCount = goldCount;
+        
+        [users addObject:user];
       }
       
-      self.userList = arr;
+      self.userList = users;
       [self updateTableData];
       
       NSLog(@"items: %@", items.debugDescription);
@@ -48,7 +69,7 @@
   }];
 }
 
-- (void) updateTableData {
+- (void)updateTableData {
   dispatch_async(dispatch_get_main_queue(), ^{
     [self.tableView reloadData];
   });
@@ -60,30 +81,21 @@
   return self.userList.count;
 }
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-  return 1;
-}
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
   
-  UserCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
+  UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellId];
   
-  if (!cell) {
-    cell = UserCell.new;
-  }
+  User *user = self.userList[indexPath.row];
   
-  return nil;
+  cell.textLabel.text = user.name;
+  UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:user.imageUrl]]];
+  cell.imageView.image = image;
+  
+  return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-  
-}
-
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-  
-  User *user = [self.userList objectAtIndex:indexPath.row];
-  UserCell *userCell = (UserCell*)cell;
-  [userCell updateUI:user];
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+  return 100;
 }
 
 @end

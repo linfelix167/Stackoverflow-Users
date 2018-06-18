@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface ViewController : UITableViewController
-
-@property (strong, nonatomic) NSArray *userList;
+{
+  UISearchBar *searchBar;
+}
 
 @end
 
