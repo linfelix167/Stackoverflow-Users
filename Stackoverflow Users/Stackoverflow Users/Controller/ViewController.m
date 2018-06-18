@@ -29,7 +29,7 @@ NSString *cellId = @"cellId";
   
   [self fetchUsers];
   
-  self.navigationItem.title = @"Users";
+  self.navigationItem.title = @"Stack Overflow";
   self.navigationController.navigationBar.prefersLargeTitles = YES;
   
   [self.tableView registerClass:UITableViewCell.class forCellReuseIdentifier:cellId];
@@ -91,11 +91,43 @@ NSString *cellId = @"cellId";
   UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:user.imageUrl]]];
   cell.imageView.image = image;
   
+  NSMutableAttributedString *completeText = [[NSMutableAttributedString alloc] initWithString:@""];
+  
+  NSTextAttachment *goldImage = NSTextAttachment.new;
+  goldImage.image = [UIImage imageNamed:@"gold"];
+  goldImage.bounds = CGRectMake(0, -5.0, goldImage.image.size.width, goldImage.image.size.height);
+  NSAttributedString *attachGold = [NSAttributedString attributedStringWithAttachment:goldImage];
+  [completeText appendAttributedString:attachGold];
+  NSMutableAttributedString *goldValue = [[NSMutableAttributedString alloc] initWithString:user.goldCount.stringValue];
+  [goldValue addAttribute:NSKernAttributeName value:@1.0 range:NSMakeRange(0, goldValue.length)];
+  [completeText appendAttributedString:goldValue];
+  
+  NSTextAttachment *silverImage = NSTextAttachment.new;
+  silverImage.image = [UIImage imageNamed:@"silver"];
+  silverImage.bounds = CGRectMake(0, -5.0, silverImage.image.size.width, silverImage.image.size.height);
+  NSAttributedString *attachSilver = [NSAttributedString attributedStringWithAttachment:silverImage];
+  [completeText appendAttributedString:attachSilver];
+  NSMutableAttributedString *silverValue = [[NSMutableAttributedString alloc] initWithString:user.silverCount.stringValue];
+  [silverValue addAttribute:NSKernAttributeName value:@1.0 range:NSMakeRange(0, silverValue.length)];
+  [completeText appendAttributedString:silverValue];
+  
+  NSTextAttachment *bronzeImage = NSTextAttachment.new;
+  bronzeImage.image = [UIImage imageNamed:@"bronze"];
+  bronzeImage.bounds = CGRectMake(0, -5.0, bronzeImage.image.size.width, bronzeImage.image.size.height);
+  NSAttributedString *attachBronze = [NSAttributedString attributedStringWithAttachment:bronzeImage];
+  [completeText appendAttributedString:attachBronze];
+  NSMutableAttributedString *bronzeValue = [[NSMutableAttributedString alloc] initWithString:user.bronzeCount.stringValue];
+  [bronzeValue addAttribute:NSKernAttributeName value:@1.0 range:NSMakeRange(0, bronzeValue.length)];
+  [completeText appendAttributedString:bronzeValue];
+  
+  cell.detailTextLabel.textAlignment = NSTextAlignmentRight;
+  cell.detailTextLabel.attributedText = completeText;
+  
   return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-  return 100;
+  return 70;
 }
 
 @end
