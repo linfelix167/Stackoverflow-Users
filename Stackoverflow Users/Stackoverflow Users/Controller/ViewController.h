@@ -10,6 +10,7 @@
 
 @interface ViewController : UITableViewController
 
+@property (strong, nonatomic) NSArray *userList;
 
 @end
 

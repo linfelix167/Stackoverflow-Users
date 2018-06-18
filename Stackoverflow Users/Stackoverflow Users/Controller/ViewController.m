@@ -9,12 +9,7 @@
 #import "ViewController.h"
 #import "HTTPService.h"
 #import "User.h"
-
-@interface ViewController ()
-
-@property (strong, nonatomic) NSArray *userList;
-
-@end
+#import "UserCell.h"
 
 @implementation ViewController
 
@@ -35,8 +30,14 @@
       for (NSDictionary *dictionary in items) {
         User *user = User.new;
         user.name = [dictionary objectForKey:@"display_name"];
+        user.imageUrl = [dictionary objectForKey:@"profile_image"];
         
-        [arr addObject:user.name];
+        NSDictionary *badgeCounts = [dictionary objectForKey:@"badge_counts"];
+        user.bronzeCount = [badgeCounts objectForKey:@"bronze"];
+        user.silverCount = [badgeCounts objectForKey:@"silver"];
+        user.goldCount = [badgeCounts objectForKey:@"gold"];
+        
+        [arr addObject:user];
       }
       
       self.userList = arr;
@@ -53,25 +54,36 @@
   });
 }
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-  return 1;
-}
+#pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
   return self.userList.count;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-  return 50;
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+  return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
   
-  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"main" forIndexPath:indexPath];
+  UserCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
   
-  cell.textLabel.text = self.userList[indexPath.row];
+  if (!cell) {
+    cell = UserCell.new;
+  }
   
-  return cell;
+  return nil;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+  
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+  
+  User *user = [self.userList objectAtIndex:indexPath.row];
+  UserCell *userCell = (UserCell*)cell;
+  [userCell updateUI:user];
 }
 
 @end

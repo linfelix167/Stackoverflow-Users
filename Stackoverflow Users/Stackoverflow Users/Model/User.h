@@ -12,6 +12,9 @@
 
 @property(nonatomic, strong) NSString *name;
 @property(nonatomic, strong) NSString *imageUrl;
+@property(nonatomic, strong) NSString *bronzeCount;
+@property(nonatomic, strong) NSString *silverCount;
+@property(nonatomic, strong) NSString *goldCount;
 
 @end
 
