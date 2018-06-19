@@ -123,7 +123,7 @@ NSString *cellId = @"cellId";
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-  return 70;
+  return 88;
 }
 
 @end
