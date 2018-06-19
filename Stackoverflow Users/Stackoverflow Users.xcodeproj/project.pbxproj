@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A01A2F0620D8105D00791F7C /* UserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A01A2F0520D8105D00791F7C /* UserCell.m */; };
 		A09D2FF420D5ECDD00060AE0 /* HTTPService.m in Sources */ = {isa = PBXBuildFile; fileRef = A09D2FF320D5ECDD00060AE0 /* HTTPService.m */; };
 		A0A5009A20D20E1900A80B31 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A0A5009920D20E1900A80B31 /* AppDelegate.m */; };
 		A0A5009D20D20E1900A80B31 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0A5009C20D20E1900A80B31 /* ViewController.m */; };
@@ -19,8 +18,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		A01A2F0420D8105D00791F7C /* UserCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserCell.h; sourceTree = "<group>"; };
-		A01A2F0520D8105D00791F7C /* UserCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserCell.m; sourceTree = "<group>"; };
 		A09D2FF220D5ECDD00060AE0 /* HTTPService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HTTPService.h; sourceTree = "<group>"; };
 		A09D2FF320D5ECDD00060AE0 /* HTTPService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HTTPService.m; sourceTree = "<group>"; };
 		A0A5009520D20E1900A80B31 /* Stackoverflow Users.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Stackoverflow Users.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -85,7 +82,6 @@
 		A0A5009720D20E1900A80B31 /* Stackoverflow Users */ = {
 			isa = PBXGroup;
 			children = (
-				A0E1C62C20D6EE22007F722A /* View */,
 				A0E1C62B20D6E798007F722A /* Controller */,
 				A09D2FF120D5ECAD00060AE0 /* Services */,
 				A00DBE9F20D469BF00FF9847 /* Model */,
@@ -107,15 +103,6 @@
 				A0A5009C20D20E1900A80B31 /* ViewController.m */,
 			);
 			path = Controller;
-			sourceTree = "<group>";
-		};
-		A0E1C62C20D6EE22007F722A /* View */ = {
-			isa = PBXGroup;
-			children = (
-				A01A2F0420D8105D00791F7C /* UserCell.h */,
-				A01A2F0520D8105D00791F7C /* UserCell.m */,
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -192,7 +179,6 @@
 				A0A5009D20D20E1900A80B31 /* ViewController.m in Sources */,
 				A09D2FF420D5ECDD00060AE0 /* HTTPService.m in Sources */,
 				A0A500A820D20E1B00A80B31 /* main.m in Sources */,
-				A01A2F0620D8105D00791F7C /* UserCell.m in Sources */,
 				A0A5009A20D20E1900A80B31 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
