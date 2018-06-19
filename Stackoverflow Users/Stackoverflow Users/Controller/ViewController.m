@@ -23,10 +23,6 @@ NSString *cellId = @"cellId";
 - (void)viewDidLoad {
   [super viewDidLoad];
   
-  searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
-  [searchBar setPlaceholder:@"Search for User"];
-  self.tableView.tableHeaderView = searchBar;
-  
   [self fetchUsers];
   
   self.navigationItem.title = @"Stack Overflow";

@@ -9,9 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface ViewController : UITableViewController
-{
-  UISearchBar *searchBar;
-}
 
 @end
 
