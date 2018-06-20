@@ -10,18 +10,16 @@
 #import "HTTPService.h"
 #import "User.h"
 
-@interface ViewController()
-
-@property (strong, nonatomic) NSMutableArray<User *> *userList;
-
-@end
-
 @implementation ViewController
 
 NSString *cellId = @"cellId";
 
 - (void)viewDidLoad {
   [super viewDidLoad];
+  
+  [self setupSearchBar];
+  // Create a list to hold search result
+  self.filteredUserList = NSMutableArray.new;
   
   [self fetchUsers];
   
@@ -58,11 +56,23 @@ NSString *cellId = @"cellId";
       }
       
       self.userList = users;
+      // Initially display the full list. This will toggle between the full and the filtered lists
+      self.displayedUserList = self.userList;
       [self updateTableData];
       
       NSLog(@"items: %@", items.debugDescription);
     }
   }];
+}
+
+- (void)setupSearchBar {
+  self.searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
+  self.searchController.searchResultsUpdater = self;
+  self.searchController.dimsBackgroundDuringPresentation = NO;
+  self.searchController.searchBar.delegate = self;
+  self.searchController.searchBar.placeholder = @"Search for users";
+  self.tableView.tableHeaderView = self.searchController.searchBar;
+  self.definesPresentationContext = YES;
 }
 
 - (void)updateTableData {
@@ -73,15 +83,19 @@ NSString *cellId = @"cellId";
 
 #pragma mark - Table view data source
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+  return 1;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-  return self.userList.count;
+  return self.displayedUserList.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
   
   UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellId];
   
-  User *user = self.userList[indexPath.row];
+  User *user = self.displayedUserList[indexPath.row];
   
   cell.textLabel.text = user.name;
   UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:user.imageUrl]]];
@@ -124,6 +138,26 @@ NSString *cellId = @"cellId";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
   return 88;
+}
+
+#pragma mark - UISearchResultsUpdating
+
+- (void)updateSearchResultsForSearchController:(UISearchController *)searchController {
+  NSString *searchText = searchController.searchBar.text;
+  
+  // Check if user cancelled or delete the search term
+  if (![searchText isEqualToString:@""]) {
+    [self.filteredUserList removeAllObjects];
+    for (User *user in self.userList) {
+      if ([searchText isEqualToString:@""] || [user.name localizedCaseInsensitiveContainsString:searchText] == YES) {
+        [self.filteredUserList addObject:user];
+      }
+    }
+    self.displayedUserList = self.filteredUserList;
+  } else {
+    self.displayedUserList = self.userList;
+  }
+  [self.tableView reloadData];
 }
 
 @end

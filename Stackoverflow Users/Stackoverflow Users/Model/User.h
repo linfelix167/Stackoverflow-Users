@@ -10,11 +10,11 @@
 
 @interface User : NSObject
 
-@property(nonatomic, strong) NSString *name;
-@property(nonatomic, strong) NSString *imageUrl;
-@property(nonatomic, strong) NSNumber *bronzeCount;
-@property(nonatomic, strong) NSNumber *silverCount;
-@property(nonatomic, strong) NSNumber *goldCount;
+@property (strong, nonatomic) NSString *name;
+@property (strong, nonatomic) NSString *imageUrl;
+@property (strong, nonatomic) NSNumber *bronzeCount;
+@property (strong, nonatomic) NSNumber *silverCount;
+@property (strong, nonatomic) NSNumber *goldCount;
 
 @end
 
