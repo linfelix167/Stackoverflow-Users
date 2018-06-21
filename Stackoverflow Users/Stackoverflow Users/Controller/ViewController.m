@@ -98,6 +98,7 @@ NSString *cellId = @"cellId";
   User *user = self.displayedUserList[indexPath.row];
   
   cell.textLabel.text = user.name;
+  
   UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:user.imageUrl]]];
   cell.imageView.image = image;
   
@@ -137,7 +138,7 @@ NSString *cellId = @"cellId";
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-  return 88;
+  return 70;
 }
 
 #pragma mark - UISearchResultsUpdating
