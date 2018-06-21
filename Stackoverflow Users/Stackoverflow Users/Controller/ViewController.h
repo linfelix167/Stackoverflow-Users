@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "User.h"
+@import SafariServices;
 
-@interface ViewController : UITableViewController <UISearchResultsUpdating, UISearchBarDelegate>
+@interface ViewController : UITableViewController <UISearchResultsUpdating, UISearchBarDelegate, SFSafariViewControllerDelegate>
 
 @property (strong, nonatomic) NSMutableArray<User *> *userList;
 @property (strong, nonatomic) NSMutableArray<User *> *filteredUserList;

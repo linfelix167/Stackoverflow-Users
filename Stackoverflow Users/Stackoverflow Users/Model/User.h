@@ -12,6 +12,7 @@
 
 @property (strong, nonatomic) NSString *name;
 @property (strong, nonatomic) NSString *imageUrl;
+@property (strong, nonatomic) NSString *link;
 @property (strong, nonatomic) NSNumber *bronzeCount;
 @property (strong, nonatomic) NSNumber *silverCount;
 @property (strong, nonatomic) NSNumber *goldCount;

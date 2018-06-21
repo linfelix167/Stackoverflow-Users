@@ -29,6 +29,12 @@ NSString *cellId = @"cellId";
   [self.tableView registerClass:UITableViewCell.class forCellReuseIdentifier:cellId];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+  [super viewWillAppear:animated];
+  
+  self.navigationItem.hidesSearchBarWhenScrolling = NO;
+}
+
 - (void) fetchUsers {
   [[HTTPService instance] getUsers:^(NSDictionary * _Nullable dataDictionary, NSString * _Nullable errMessage) {
     if (dataDictionary) {
@@ -42,12 +48,14 @@ NSString *cellId = @"cellId";
         
         NSString *name = dictionary[@"display_name"];
         NSString *imageUrl = dictionary[@"profile_image"];
+        NSString *link = dictionary[@"link"];
         NSNumber *bronzeCount = badgeCounts[@"bronze"];
         NSNumber *silverCount = badgeCounts[@"silver"];
         NSNumber *goldCount = badgeCounts[@"gold"];
         
         user.name = name;
         user.imageUrl = imageUrl;
+        user.link = link;
         user.bronzeCount = bronzeCount;
         user.silverCount = silverCount;
         user.goldCount = goldCount;
@@ -71,7 +79,7 @@ NSString *cellId = @"cellId";
   self.searchController.dimsBackgroundDuringPresentation = NO;
   self.searchController.searchBar.delegate = self;
   self.searchController.searchBar.placeholder = @"Search for users";
-  self.tableView.tableHeaderView = self.searchController.searchBar;
+  self.navigationItem.searchController = self.searchController;
   self.definesPresentationContext = YES;
 }
 
@@ -94,6 +102,7 @@ NSString *cellId = @"cellId";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
   
   UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellId];
+  cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
   
   User *user = self.displayedUserList[indexPath.row];
   
@@ -135,6 +144,14 @@ NSString *cellId = @"cellId";
   cell.detailTextLabel.attributedText = completeText;
   
   return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+  User *user = self.displayedUserList[indexPath.row];
+  
+  SFSafariViewController *sfVC = [[SFSafariViewController alloc] initWithURL:[NSURL URLWithString:user.link]];
+  sfVC.delegate = self;
+  [self presentViewController:sfVC animated:YES completion:nil];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
