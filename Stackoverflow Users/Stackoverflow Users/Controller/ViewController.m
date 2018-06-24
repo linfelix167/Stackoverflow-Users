@@ -19,6 +19,7 @@ NSString *cellId = @"cellId";
   [super viewDidLoad];
   
   [self setupSearchBar];
+  
   // Create a list to hold search result
   self.filteredUserList = NSMutableArray.new;
   
@@ -65,6 +66,7 @@ NSString *cellId = @"cellId";
       }
       
       self.userList = users;
+      
       // Initially display the full list. This will toggle between the full and the filtered lists
       self.displayedUserList = self.userList;
       [self updateTableData];
@@ -90,11 +92,15 @@ NSString *cellId = @"cellId";
   });
 }
 
-#pragma mark - Table view data source
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-  return 1;
+- (NSAttributedString *)setTextImage:(NSString *)name{
+  NSTextAttachment *imageText = NSTextAttachment.new;
+  imageText.image = [UIImage imageNamed:name];
+  imageText.bounds = CGRectMake(0, -5.0, imageText.image.size.width, imageText.image.size.height);
+  NSAttributedString *attach = [NSAttributedString attributedStringWithAttachment:imageText];
+  return attach;
 }
+
+#pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
   return self.displayedUserList.count;
@@ -107,35 +113,26 @@ NSString *cellId = @"cellId";
   
   User *user = self.displayedUserList[indexPath.row];
   
+  // Set cell title
   cell.textLabel.text = user.name;
   
+  // Set cell image
   [cell.imageView sd_setImageWithURL:[NSURL URLWithString:user.imageUrl] placeholderImage:[UIImage imageNamed:@"loading"]];
   
+  // Set badget value
   NSMutableAttributedString *completeText = [[NSMutableAttributedString alloc] initWithString:@""];
   
-  NSTextAttachment *goldImage = NSTextAttachment.new;
-  goldImage.image = [UIImage imageNamed:@"gold"];
-  goldImage.bounds = CGRectMake(0, -5.0, goldImage.image.size.width, goldImage.image.size.height);
-  NSAttributedString *attachGold = [NSAttributedString attributedStringWithAttachment:goldImage];
-  [completeText appendAttributedString:attachGold];
+  [completeText appendAttributedString:[self setTextImage:@"gold"]];
   NSMutableAttributedString *goldValue = [[NSMutableAttributedString alloc] initWithString:user.goldCount.stringValue];
   [goldValue addAttribute:NSKernAttributeName value:@1.0 range:NSMakeRange(0, goldValue.length)];
   [completeText appendAttributedString:goldValue];
   
-  NSTextAttachment *silverImage = NSTextAttachment.new;
-  silverImage.image = [UIImage imageNamed:@"silver"];
-  silverImage.bounds = CGRectMake(0, -5.0, silverImage.image.size.width, silverImage.image.size.height);
-  NSAttributedString *attachSilver = [NSAttributedString attributedStringWithAttachment:silverImage];
-  [completeText appendAttributedString:attachSilver];
+  [completeText appendAttributedString:[self setTextImage:@"silver"]];
   NSMutableAttributedString *silverValue = [[NSMutableAttributedString alloc] initWithString:user.silverCount.stringValue];
   [silverValue addAttribute:NSKernAttributeName value:@1.0 range:NSMakeRange(0, silverValue.length)];
   [completeText appendAttributedString:silverValue];
   
-  NSTextAttachment *bronzeImage = NSTextAttachment.new;
-  bronzeImage.image = [UIImage imageNamed:@"bronze"];
-  bronzeImage.bounds = CGRectMake(0, -5.0, bronzeImage.image.size.width, bronzeImage.image.size.height);
-  NSAttributedString *attachBronze = [NSAttributedString attributedStringWithAttachment:bronzeImage];
-  [completeText appendAttributedString:attachBronze];
+  [completeText appendAttributedString:[self setTextImage:@"bronze"]];
   NSMutableAttributedString *bronzeValue = [[NSMutableAttributedString alloc] initWithString:user.bronzeCount.stringValue];
   [bronzeValue addAttribute:NSKernAttributeName value:@1.0 range:NSMakeRange(0, bronzeValue.length)];
   [completeText appendAttributedString:bronzeValue];
