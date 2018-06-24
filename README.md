@@ -8,3 +8,15 @@
 - While the gravatar is being downloaded, the UI should show a loading animation.
 - Each of the photos should be downloaded only once and stored for offline usage.
 - The UI should always be responsive.
+
+### Prerequisites
+
+```
+Xcode 9.4
+```
+
+## Built With
+* [SDWebImage](https://github.com/rs/SDWebImage) - Asynchronous image downloader with cache support as a UIImageView category
+
+## Authors
+* **Felix Lin** - *Initial work* - [linfelix167](https://github.com/linfelix167)
