@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "HTTPService.h"
 #import "User.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @implementation ViewController
 
@@ -108,8 +109,7 @@ NSString *cellId = @"cellId";
   
   cell.textLabel.text = user.name;
   
-  UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:user.imageUrl]]];
-  cell.imageView.image = image;
+  [cell.imageView sd_setImageWithURL:[NSURL URLWithString:user.imageUrl] placeholderImage:[UIImage imageNamed:@"loading"]];
   
   NSMutableAttributedString *completeText = [[NSMutableAttributedString alloc] initWithString:@""];
   
@@ -155,7 +155,7 @@ NSString *cellId = @"cellId";
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-  return 70;
+  return 50;
 }
 
 #pragma mark - UISearchResultsUpdating
