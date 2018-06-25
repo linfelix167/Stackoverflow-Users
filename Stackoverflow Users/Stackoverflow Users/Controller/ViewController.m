@@ -102,6 +102,10 @@ NSString *cellId = @"cellId";
 
 #pragma mark - Table view data source
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+  return 1;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
   return self.displayedUserList.count;
 }
@@ -119,7 +123,7 @@ NSString *cellId = @"cellId";
   // Set cell image
   [cell.imageView sd_setImageWithURL:[NSURL URLWithString:user.imageUrl] placeholderImage:[UIImage imageNamed:@"loading"]];
   
-  // Set badget value
+  // Set badge value
   NSMutableAttributedString *completeText = [[NSMutableAttributedString alloc] initWithString:@""];
   
   [completeText appendAttributedString:[self setTextImage:@"gold"]];
