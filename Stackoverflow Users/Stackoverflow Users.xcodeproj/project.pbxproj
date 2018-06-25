@@ -106,11 +106,12 @@
 		A0A5009720D20E1900A80B31 /* Stackoverflow Users */ = {
 			isa = PBXGroup;
 			children = (
-				A09D2FF120D5ECAD00060AE0 /* Services */,
-				A0E1C62B20D6E798007F722A /* Controller */,
-				A00DBE9F20D469BF00FF9847 /* Model */,
 				A0AE5D2620E027AE00CA640D /* Application */,
+				A00DBE9F20D469BF00FF9847 /* Model */,
+				A0E1C62B20D6E798007F722A /* Controller */,
+				A09D2FF120D5ECAD00060AE0 /* Services */,
 				A0AE5D2520E0279300CA640D /* Support Files */,
+				A0A500A620D20E1B00A80B31 /* Info.plist */,
 			);
 			path = "Stackoverflow Users";
 			sourceTree = "<group>";
@@ -121,7 +122,6 @@
 				A0A5009E20D20E1900A80B31 /* Main.storyboard */,
 				A0A500A120D20E1B00A80B31 /* Assets.xcassets */,
 				A0A500A320D20E1B00A80B31 /* LaunchScreen.storyboard */,
-				A0A500A620D20E1B00A80B31 /* Info.plist */,
 			);
 			path = "Support Files";
 			sourceTree = "<group>";
